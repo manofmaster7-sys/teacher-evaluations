@@ -261,6 +261,72 @@
             </tfoot>
         </table>
 
+        <!-- قسم المجموع وملاحظات المشرف -->
+<div class="summary-section">
+    <!-- خانة المجموع الإجمالي -->
+    <div class="total-score-box">
+        <span id="lblTotalScore">المجموع الإجمالي:</span>
+        <span id="totalScoreValue">0 / 100</span>
+    </div>
+
+    <!-- مربع ملاحظات المشرف العلمي -->
+    <div class="notes-container">
+        <label for="supervisorNotes" id="lblSupervisorNotes">ملاحظات المشرف العلمي:</label>
+        <textarea id="supervisorNotes" rows="4" placeholder="اكتب ملاحظاتك أو توصياتك هنا..."></textarea>
+    </div>
+</div>
+
+<style>
+    .summary-section {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .total-score-box {
+        background-color: #ebf8ff;
+        border: 2px solid #2b6cb0;
+        border-radius: 8px;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #2b6cb0;
+    }
+
+    .notes-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-align: right;
+    }
+
+    .notes-container label {
+        font-weight: bold;
+        color: #1a365d;
+        font-size: 15px;
+    }
+
+    .notes-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e0;
+        border-radius: 6px;
+        font-size: 14px;
+        resize: vertical;
+        box-sizing: border-box;
+    }
+
+    .notes-container textarea:focus {
+        outline: none;
+        border-color: #2b6cb0;
+        box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.2);
+    }
+</style>
+        
         <div class="actions">
             <a href="index.html" class="btn btn-back" id="btnBack">العودة للرئيسية</a>
             <button type="button" class="btn btn-download" id="btnDownload" onclick="downloadEvaluation()">تحميل</button>
