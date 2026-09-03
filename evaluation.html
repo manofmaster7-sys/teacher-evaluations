@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="htmlTag">
 <head>
@@ -26,7 +25,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
-        /* تثبيت الهيدر والأزرار */
+        /* الهيدر والأزرار */
         header {
             display: flex;
             justify-content: space-between;
@@ -92,7 +91,7 @@
             justify-content: center;
         }
 
-        /* شبكة بيانات التقييم الأساسية */
+        /* شبكة معلومات التقييم */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -120,7 +119,7 @@
             font-size: 14px;
         }
 
-        /* جدول التقييم */
+        /* جدول البنود */
         .eval-table {
             width: 100%;
             border-collapse: collapse;
@@ -149,7 +148,7 @@
             font-weight: bold;
         }
 
-        /* قسم المجموع وملاحظات المشرف */
+        /* المجموع والملاحظات */
         .summary-section {
             margin-top: 20px;
             display: flex;
@@ -187,18 +186,18 @@
             resize: vertical;
         }
 
-        /* الأزرار العلوية والسفلية */
+        /* الأزرار التحكمية */
         .actions-container {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 10px;
             margin-top: 20px;
         }
         .btn-action {
-            padding: 10px 20px;
+            padding: 12px 15px;
             border: none;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
@@ -208,6 +207,7 @@
         .btn-back { background-color: #718096; }
         .btn-reset { background-color: #e53e3e; }
         .btn-print { background-color: #38a169; }
+        .btn-save { background-color: #2b6cb0; }
 
         @media print {
             .lang-buttons, .actions-container { display: none !important; }
@@ -241,7 +241,7 @@
         </div>
     </header>
 
-    <!-- معلومات التقييم الأساسية -->
+    <!-- معلومات التقييم -->
     <div class="info-grid">
         <div class="form-group">
             <label id="lblTeacher">اسم المدرس:</label>
@@ -269,7 +269,7 @@
         </div>
     </div>
 
-    <!-- جدول البنود -->
+    <!-- جدول التقييم -->
     <table class="eval-table">
         <thead>
             <tr>
@@ -279,9 +279,7 @@
                 <th style="width: 100px;" class="center" id="thScore">الدرجة</th>
             </tr>
         </thead>
-        <tbody id="tableBody">
-            <!-- سيتم توليد البنود الـ 15 عبر الـ JavaScript تلقائياً -->
-        </tbody>
+        <tbody id="tableBody"></tbody>
     </table>
 
     <!-- المجموع والملاحظات -->
@@ -297,15 +295,18 @@
         </div>
     </div>
 
-    <!-- الأزرار التحكمية -->
+    <!-- التحكم والسحابة -->
     <div class="actions-container">
         <a href="index.html" class="btn-action btn-back" id="btnBack">العودة للرئيسية</a>
         <button onclick="resetForm()" class="btn-action btn-reset" id="btnReset">تفريغ الخانات</button>
         <button onclick="window.print()" class="btn-action btn-print" id="btnPrint">طباعة / حفظ PDF</button>
+        <button onclick="sendToGoogleSheets()" class="btn-action btn-save" id="btnSave">حفظ التقييم</button>
     </div>
 </div>
 
 <script>
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1dU706prU7zjaoqTJ12q2Ja6WGrt44f0Zhwfq7FRiDF2EC8qk3URSH_4gamy2fuVY/exec';
+
     const itemsData = [
         { max: 10, ar: "مدى تحقق أهداف الدرس", en: "Achievement of lesson objectives", tr: "Ders hedeflerine ulaşma düzeyi" },
         { max: 10, ar: "الإدارة الصفية الناجحة", en: "Successful classroom management", tr: "Başarılı sınıf yönetimi" },
@@ -343,7 +344,8 @@
             phNotes: "اكتب ملاحظاتك أو توصياتك هنا...",
             btnBack: "العودة للرئيسية",
             btnReset: "تفريغ الخانات",
-            btnPrint: "طباعة / حفظ PDF"
+            btnPrint: "طباعة / حفظ PDF",
+            btnSave: "حفظ التقييم"
         },
         en: {
             docTitle: "Teacher Evaluation Form - Al Manahal International School",
@@ -363,7 +365,8 @@
             phNotes: "Write your notes or recommendations here...",
             btnBack: "Back to Home",
             btnReset: "Reset Form",
-            btnPrint: "Print / Save PDF"
+            btnPrint: "Print / Save PDF",
+            btnSave: "Save Evaluation"
         },
         tr: {
             docTitle: "Öğretmen Değerlendirme Formu - El Manahal Uluslararası Okulu",
@@ -383,7 +386,8 @@
             phNotes: "Notlarınızı veya önerilerinizi buraya yazın...",
             btnBack: "Ana Sayfaya Dön",
             btnReset: "Formu Temizle",
-            btnPrint: "Yazdır / PDF Kaydet"
+            btnPrint: "Yazdır / PDF Kaydet",
+            btnSave: "Kaydet"
         }
     };
 
@@ -412,14 +416,8 @@
         inputs.forEach(input => {
             let val = parseFloat(input.value) || 0;
             const max = parseFloat(input.dataset.max);
-            if (val > max) {
-                val = max;
-                input.value = max;
-            }
-            if (val < 0) {
-                val = 0;
-                input.value = 0;
-            }
+            if (val > max) { val = max; input.value = max; }
+            if (val < 0) { val = 0; input.value = 0; }
             total += val;
         });
         document.getElementById('totalScoreValue').innerText = `${total} / 100`;
@@ -429,6 +427,53 @@
         document.querySelectorAll('input').forEach(input => input.value = '');
         document.getElementById('supervisorNotes').value = '';
         calculateTotal();
+    }
+
+    function sendToGoogleSheets() {
+        const btnSave = document.getElementById('btnSave');
+        const teacherName = document.getElementById('teacherName').value.trim();
+
+        if (!teacherName) {
+            alert(currentLang === 'ar' ? 'يرجى كتابة اسم المدرس قبل الحفظ.' : 'Please enter the teacher name before saving.');
+            return;
+        }
+
+        btnSave.innerText = currentLang === 'ar' ? 'جاري الحفظ...' : 'Saving...';
+        btnSave.disabled = true;
+
+        let scores = [];
+        document.querySelectorAll('.score-input').forEach((input, idx) => {
+            scores.push(`بند ${idx + 1}: ${input.value || 0}`);
+        });
+
+        const payload = {
+            date: document.getElementById('evalDate').value || new Date().toISOString().split('T')[0],
+            teacherName: teacherName,
+            subject: document.getElementById('subject').value,
+            lesson: document.getElementById('lesson').value,
+            supervisor1: document.getElementById('supervisor1').value,
+            supervisor2: document.getElementById('supervisor2').value,
+            totalScore: document.getElementById('totalScoreValue').innerText,
+            notes: document.getElementById('supervisorNotes').value,
+            scoresDetail: scores.join(' | ')
+        };
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            alert(currentLang === 'ar' ? 'تم حفظ التقييم بنجاح في Google Sheets!' : 'Evaluation saved successfully to Google Sheets!');
+            btnSave.innerText = translations[currentLang].btnSave;
+            btnSave.disabled = false;
+        })
+        .catch(error => {
+            alert(currentLang === 'ar' ? 'حدث خطأ أثناء الحفظ، يرجى المحاولة لاحقاً.' : 'An error occurred while saving.');
+            btnSave.innerText = translations[currentLang].btnSave;
+            btnSave.disabled = false;
+        });
     }
 
     function applyLanguage(lang) {
@@ -454,15 +499,14 @@
         document.getElementById('btnBack').innerText = t.btnBack;
         document.getElementById('btnReset').innerText = t.btnReset;
         document.getElementById('btnPrint').innerText = t.btnPrint;
+        document.getElementById('btnSave').innerText = t.btnSave;
 
         renderTable();
         calculateTotal();
         localStorage.setItem('siteLang', lang);
     }
 
-    function setLanguage(lang) {
-        applyLanguage(lang);
-    }
+    function setLanguage(lang) { applyLanguage(lang); }
 
     window.onload = function() {
         const savedLang = localStorage.getItem('siteLang') || 'ar';
