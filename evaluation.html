@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="htmlTag">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="docTitle">Teacher Evaluation Form - Al Manahal International School</title>
+    <title id="docTitle">استمارة تقييم المدرسين - مدرسة المناهل الدولية</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,500 +14,454 @@
         }
         body {
             background-color: #f4f7f6;
-            padding: 30px 15px;
+            color: #2d3748;
+            padding: 20px;
         }
         .container {
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            position: relative;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
-        
-        .header-section {
-            text-align: center;
-            margin-bottom: 25px;
+
+        /* تثبيت الهيدر والأزرار */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
             border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 15px;
-        }
-        .header-section h2 {
-            color: #1a365d;
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-        .header-section p {
-            color: #718096;
-            font-size: 14px;
-        }
-        
-        .info-bar {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px;
             margin-bottom: 20px;
+            direction: ltr !important;
+        }
+        .logo-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-        
-        .info-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            align-items: center;
-        }
-
-        .info-grid-supervisors {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-top: 1px dashed #e2e8f0;
-            padding-top: 12px;
-        }
-
-        .info-field {
-            display: flex;
             align-items: center;
             gap: 8px;
-            width: 100%;
+            width: 140px;
         }
-        
-        .info-label {
-            font-size: 14px;
+        .logo-container {
+            width: 120px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .lang-buttons {
+            display: flex;
+            gap: 5px;
+            direction: ltr !important;
+        }
+        .btn-lang {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: bold;
-            color: #2d3748;
-            white-space: nowrap;
+            cursor: pointer;
         }
-        
-        .info-input {
-            width: 100%;
-            padding: 8px 10px;
-            font-size: 14px;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
-            outline: none;
-            transition: border-color 0.2s;
+        .btn-lang:hover {
+            background-color: #1a365d;
         }
-        .info-input:focus {
-            border-color: #3182ce;
-            box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+        .header-title {
+            text-align: center;
+            flex-grow: 1;
+        }
+        .header-title h1 {
+            font-size: 20px;
+            color: #1a365d;
+        }
+        .header-title h2 {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: normal;
+        }
+        .right-logo-container {
+            width: 140px;
+            display: flex;
+            justify-content: center;
         }
 
-        input[type="date"] {
-            direction: ltr !important;
-            text-align: left !important;
-            font-family: Arial, sans-serif !important;
+        /* شبكة بيانات التقييم الأساسية */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
-        
-        table {
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .form-group label {
+            font-weight: bold;
+            font-size: 14px;
+            color: #2c5282;
+        }
+        .form-group input {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* جدول التقييم */
+        .eval-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        th, td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #edf2f7;
+        .eval-table th, .eval-table td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: start;
         }
-
-        html[dir="ltr"] th, html[dir="ltr"] td { text-align: left; }
-        html[dir="rtl"] th, html[dir="rtl"] td { text-align: right; }
-
-        th {
+        .eval-table th {
             background-color: #2b6cb0;
-            color: #ffffff !important;
-            font-size: 16px;
-            font-weight: bold;
+            color: white;
+            font-size: 15px;
         }
-
-        html[dir="ltr"] th:first-child { border-top-left-radius: 8px; }
-        html[dir="ltr"] th:last-child { border-top-right-radius: 8px; }
-        html[dir="rtl"] th:first-child { border-top-right-radius: 8px; }
-        html[dir="rtl"] th:last-child { border-top-left-radius: 8px; }
-        
-        .num-col { width: 8%; text-align: center !important; font-weight: bold; color: #4a5568; }
-        .title-col { width: 62%; font-size: 15px; color: #2d3748; }
-        .max-col { width: 15%; text-align: center !important; color: #718096; font-size: 14px; }
-        .input-col { width: 15%; text-align: center !important; }
-
-        .score-input {
-            width: 75px;
-            padding: 8px;
-            font-size: 16px;
+        .eval-table td.center {
             text-align: center;
-            border: 1.5px solid #cbd5e0;
-            border-radius: 6px;
-            font-weight: bold;
-            color: #2d3748;
-            transition: all 0.2s;
         }
-        .score-input:focus {
-            outline: none;
-            border-color: #3182ce;
-            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+        .score-input {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        .total-row {
-            background-color: #ebf8ff;
-            font-weight: bold;
-        }
-        .total-row td {
-            border-bottom: none;
-            padding: 16px;
-            font-size: 18px;
-            color: #2b6cb0;
+        /* قسم المجموع وملاحظات المشرف */
+        .summary-section {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         .total-score-box {
-            font-size: 22px;
-            color: #2b6cb0;
-            font-weight: bold;
-            text-align: center !important;
-        }
-
-        .actions {
-            margin-top: 25px;
+            background-color: #ebf8ff;
+            border: 2px solid #2b6cb0;
+            border-radius: 8px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2b6cb0;
         }
-        .btn {
-            padding: 10px 24px;
+        .notes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .notes-container label {
+            font-weight: bold;
+            color: #1a365d;
+            font-size: 15px;
+        }
+        .notes-container textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        /* الأزرار العلوية والسفلية */
+        .actions-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn-action {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
             font-size: 15px;
             font-weight: bold;
-            border-radius: 6px;
-            text-decoration: none;
             cursor: pointer;
-            border: none;
-            transition: background 0.2s;
+            text-decoration: none;
+            color: white;
+            text-align: center;
         }
-        .btn-back { background-color: #718096; color: white; }
-        .btn-back:hover { background-color: #4a5568; }
-        
-        .btn-download { background-color: #38a169; color: white; }
-        .btn-download:hover { background-color: #2f855a; }
-
-        .btn-reset { background-color: #e53e3e; color: white; }
-        .btn-reset:hover { background-color: #c53030; }
+        .btn-back { background-color: #718096; }
+        .btn-reset { background-color: #e53e3e; }
+        .btn-print { background-color: #38a169; }
 
         @media print {
-            .actions, .btn { display: none !important; }
-            body { background-color: #fff; padding: 0; }
-            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
-            th {
-                background-color: #2b6cb0 !important;
-                color: #ffffff !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+            .lang-buttons, .actions-container { display: none !important; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 0; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-section">
-        <h2 id="pageTitle">استمارة تقييم المدرسين</h2>
-        <p id="pageSubTitle">المكتب الأكاديمي - العام الدراسي 2026 / 2027</p>
-    </div>
-
-    <form id="evalForm">
-        <div class="info-bar">
-            <div class="info-grid-4">
-                <div class="info-field">
-                    <span class="info-label" id="lblTeacher">اسم المدرس:</span>
-                    <input type="text" class="info-input" id="inpTeacher" placeholder="اسم المدرس">
-                </div>
-
-                <div class="info-field">
-                    <span class="info-label" id="lblSubject">اسم المادة:</span>
-                    <input type="text" class="info-input" id="inpSubject" placeholder="المادة">
-                </div>
-
-                <div class="info-field">
-                    <span class="info-label" id="lblLesson">عنوان الدرس:</span>
-                    <input type="text" class="info-input" id="inpLesson" placeholder="عنوان الدرس">
-                </div>
-
-                <div class="info-field">
-                    <span class="info-label" id="lblDate">التاريخ:</span>
-                    <input type="date" class="info-input" id="inpDate" lang="en">
-                </div>
+    <header>
+        <div class="logo-wrapper">
+            <div class="logo-container">
+                <img src="school-logo.png" alt="School Logo">
             </div>
-
-            <div class="info-grid-supervisors">
-                <span class="info-label" id="lblSupervisor">المشرف العلمي:</span>
-                <input type="text" class="info-input" id="inpSupervisor1" placeholder="اسم المشرف الأول" style="max-width: 250px;">
-                <input type="text" class="info-input" id="inpSupervisor2" placeholder="اسم المشرف الثاني" style="max-width: 250px;">
+            <div class="lang-buttons">
+                <button class="btn-lang" onclick="setLanguage('ar')">AR</button>
+                <button class="btn-lang" onclick="setLanguage('en')">EN</button>
+                <button class="btn-lang" onclick="setLanguage('tr')">TR</button>
             </div>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th class="num-col" style="color: #ffffff !important;">#</th>
-                    <th class="title-col" id="thItem" style="color: #ffffff !important;">البند</th>
-                    <th class="max-col" id="thMax" style="color: #ffffff !important;">الدرجة العظمى</th>
-                    <th class="input-col" id="thScore" style="color: #ffffff !important;">الدرجة</th>
-                </tr>
-            </thead>
-            <tbody id="itemsTableBody"></tbody>
-            <tfoot>
-                <tr class="total-row">
-                    <td colspan="2" id="lblTotal" style="text-align: inherit;">المجموع الإجمالي:</td>
-                    <td class="max-col" style="font-weight: bold; color: #2b6cb0;">100</td>
-                    <td class="total-score-box" id="totalScore">0</td>
-                </tr>
-            </tfoot>
-        </table>
-
-    <div class="notes-container">
-        <label for="supervisorNotes" id="lblSupervisorNotes">ملاحظات المشرف العلمي:</label>
-        <textarea id="supervisorNotes" rows="4" placeholder="اكتب ملاحظاتك أو توصياتك هنا..."></textarea>
-    </div>
-</div>
-
-<style>
-    .summary-section {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .total-score-box {
-        background-color: #ebf8ff;
-        border: 2px solid #2b6cb0;
-        border-radius: 8px;
-        padding: 12px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 18px;
-        font-weight: bold;
-        color: #2b6cb0;
-    }
-
-    .notes-container {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        text-align: right;
-    }
-
-    .notes-container label {
-        font-weight: bold;
-        color: #1a365d;
-        font-size: 15px;
-    }
-
-    .notes-container textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #cbd5e0;
-        border-radius: 6px;
-        font-size: 14px;
-        resize: vertical;
-        box-sizing: border-box;
-    }
-
-    .notes-container textarea:focus {
-        outline: none;
-        border-color: #2b6cb0;
-        box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.2);
-    }
-</style>
-        
-        <div class="actions">
-            <a href="index.html" class="btn btn-back" id="btnBack">العودة للرئيسية</a>
-            <button type="button" class="btn btn-download" id="btnDownload" onclick="downloadEvaluation()">تحميل</button>
-            <button type="button" class="btn btn-reset" id="btnReset" onclick="resetForm()">تفريغ الخانات</button>
+        <div class="header-title">
+            <h1 id="deptTitle">المكتب الأكاديمي</h1>
+            <h2 id="yearTitle">تقييمات المدرسين للعام الدراسي 2026 - 2027</h2>
         </div>
-    </form>
+        <div class="right-logo-container">
+            <div class="logo-container">
+                <img src="association-logo.png" alt="Association Logo">
+            </div>
+        </div>
+    </header>
+
+    <!-- معلومات التقييم الأساسية -->
+    <div class="info-grid">
+        <div class="form-group">
+            <label id="lblTeacher">اسم المدرس:</label>
+            <input type="text" id="teacherName">
+        </div>
+        <div class="form-group">
+            <label id="lblSubject">اسم المادة:</label>
+            <input type="text" id="subject">
+        </div>
+        <div class="form-group">
+            <label id="lblLesson">عنوان الدرس:</label>
+            <input type="text" id="lesson">
+        </div>
+        <div class="form-group">
+            <label id="lblSupervisor1">المشرف العلمي الأول:</label>
+            <input type="text" id="supervisor1">
+        </div>
+        <div class="form-group">
+            <label id="lblSupervisor2">المشرف العلمي الثاني:</label>
+            <input type="text" id="supervisor2">
+        </div>
+        <div class="form-group">
+            <label id="lblDate">التاريخ:</label>
+            <input type="date" id="evalDate">
+        </div>
+    </div>
+
+    <!-- جدول البنود -->
+    <table class="eval-table">
+        <thead>
+            <tr>
+                <th style="width: 50px;" class="center">#</th>
+                <th id="thItem">البند</th>
+                <th style="width: 100px;" class="center" id="thMax">الدرجة العظمى</th>
+                <th style="width: 100px;" class="center" id="thScore">الدرجة</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- سيتم توليد البنود الـ 15 عبر الـ JavaScript تلقائياً -->
+        </tbody>
+    </table>
+
+    <!-- المجموع والملاحظات -->
+    <div class="summary-section">
+        <div class="total-score-box">
+            <span id="lblTotalScore">المجموع الإجمالي:</span>
+            <span id="totalScoreValue">0 / 100</span>
+        </div>
+
+        <div class="notes-container">
+            <label for="supervisorNotes" id="lblSupervisorNotes">ملاحظات المشرف العلمي:</label>
+            <textarea id="supervisorNotes" rows="4" placeholder="اكتب ملاحظاتك أو توصياتك هنا..."></textarea>
+        </div>
+    </div>
+
+    <!-- الأزرار التحكمية -->
+    <div class="actions-container">
+        <a href="index.html" class="btn-action btn-back" id="btnBack">العودة للرئيسية</a>
+        <button onclick="resetForm()" class="btn-action btn-reset" id="btnReset">تفريغ الخانات</button>
+        <button onclick="window.print()" class="btn-action btn-print" id="btnPrint">طباعة / حفظ PDF</button>
+    </div>
 </div>
 
 <script>
     const itemsData = [
-        { ar: "مدى تحقق أهداف الدرس", en: "Achievement of lesson objectives", tr: "Ders hedeflerine ulaşma düzeyi", max: 10, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "الإدارة الصفية الناجحة", en: "Successful classroom management", tr: "Başarılı sınıf yönetimi", max: 10, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "الالتزام بالخطة السنوية", en: "Adherence to the annual plan", tr: "Yıllık plana uyum", max: 6, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "استخدام الوسائل المتاحة والمناسبة", en: "Use of available and suitable learning aids", tr: "Uygun ve mevcut materyallerin kullanımı", max: 6, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "التقييم المرحلي والنهائي", en: "Formative and summative assessment", tr: "Süreç ve sonuç değerlendirmesi", max: 6, noteAr: "(3+3)", noteEn: "(3+3)", noteTr: "(3+3)" },
-        { ar: "التحضير المسبق للدرس", en: "Advance lesson preparation", tr: "Önceden ders hazırlığı", max: 8, noteAr: "(4+4)", noteEn: "(4+4)", noteTr: "(4+4)" },
-        { ar: "التعاون مع الإشراف وروح المبادرة", en: "Cooperation with supervision and initiative", tr: "Denetimle iş birliği ve girişimcilik", max: 8, noteAr: "(4+4)", noteEn: "(4+4)", noteTr: "(4+4)" },
-        { ar: "مهارات التواصل اللفظية والجسدية", en: "Verbal and non-verbal communication skills", tr: "Sözlü ve beden dili iletişim becerileri", max: 6, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "توظيف التعزيز", en: "Effective use of positive reinforcement", tr: "Pekiştireçlerin etkin kullanımı", max: 6, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "ربط المحتوى العلمي بالواقع", en: "Linking scientific content to real life", tr: "Akademik içeriği gerçek hayatla bağdaştırma", max: 4, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "مهارة طرح الأسئلة", en: "Questioning skills", tr: "Soru sorma becerisi", max: 5, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "مراعاة الفروق الفردية", en: "Catering to individual differences", tr: "Bireysel farklılıkları gözetme", max: 5, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "التنويع في الأساليب والطرائق", en: "Diversification of teaching methods", tr: "Yöntem ve tekniklerde çeşitlilik", max: 10, noteAr: "", noteEn: "", noteTr: "" },
-        { ar: "تطوير الذات والإلمام بالمادة العلمية", en: "Self-development and subject mastery", tr: "Kendini geliştirme ve alan hakimiyeti", max: 6, noteAr: "(3+3)", noteEn: "(3+3)", noteTr: "(3+3)" },
-        { ar: "تعزيز الهدف القيمي", en: "Reinforcement of core values", tr: "Değerler eğitiminin desteklenmesi", max: 4, noteAr: "", noteEn: "", noteTr: "" }
+        { max: 10, ar: "مدى تحقق أهداف الدرس", en: "Achievement of lesson objectives", tr: "Ders hedeflerine ulaşma düzeyi" },
+        { max: 10, ar: "الإدارة الصفية الناجحة", en: "Successful classroom management", tr: "Başarılı sınıf yönetimi" },
+        { max: 6,  ar: "الالتزام بالخطة السنوية", en: "Adherence to the annual plan", tr: "Yıllık plana uyum" },
+        { max: 6,  ar: "استخدام الوسائل المتاحة والمناسبة", en: "Use of available learning aids", tr: "Uygun ve mevcut materyallerin kullanımı" },
+        { max: 6,  ar: "التقييم المرحلي والنهائي (3+3)", en: "Formative & summative assessment (3+3)", tr: "Süreç ve sonuç değerlendirmesi (3+3)" },
+        { max: 8,  ar: "التحضير المسبق للدرس (4+4)", en: "Advance lesson preparation (4+4)", tr: "Önceden ders hazırlığı (4+4)" },
+        { max: 8,  ar: "التعاون مع الإشراف وروح المبادرة (4+4)", en: "Cooperation with supervision (4+4)", tr: "Denetimle iş birliği ve girişimcilik (4+4)" },
+        { max: 6,  ar: "مهارات التواصل اللفظية والجسدية", en: "Verbal and non-verbal communication skills", tr: "Sözlü ve beden dili iletişim becerileri" },
+        { max: 6,  ar: "توظيف التعزيز", en: "Effective use of reinforcement", tr: "Pekiştireçlerin etkin kullanımı" },
+        { max: 4,  ar: "ربط المحتوى العلمي بالواقع", en: "Linking scientific content to real life", tr: "Akademik içeriği gerçek hayatla bağdaştırma" },
+        { max: 5,  ar: "مهارة طرح الأسئلة", en: "Questioning skills", tr: "Soru sorma becerisi" },
+        { max: 5,  ar: "مراعاة الفروق الفردية", en: "Catering to individual differences", tr: "Bireysel farklılıkları gözetme" },
+        { max: 10, ar: "التنويع في الأساليب والطرائق", en: "Diversification of teaching methods", tr: "Yöntem ve tekniklerde çeşitlilik" },
+        { max: 6,  ar: "تطوير الذات والإلمام بالمادة العلمية (3+3)", en: "Self-development & subject mastery (3+3)", tr: "Kendini geliştirme ve alan hakimiyeti (3+3)" },
+        { max: 4,  ar: "تعزيز الهدف القيمي", en: "Reinforcement of core values", tr: "Değerler eğitiminin desteklenmesi" }
     ];
 
-    const uiTexts = {
+    const translations = {
         ar: {
             docTitle: "استمارة تقييم المدرسين - مدرسة المناهل الدولية",
-            pageTitle: "استمارة تقييم المدرسين",
-            pageSubTitle: "المكتب الأكاديمي - العام الدراسي 2026 / 2027",
+            deptTitle: "المكتب الأكاديمي",
+            yearTitle: "تقييمات المدرسين للعام الدراسي 2026 - 2027",
             lblTeacher: "اسم المدرس:",
-            inpTeacher: "اسم المدرس",
             lblSubject: "اسم المادة:",
-            inpSubject: "المادة",
             lblLesson: "عنوان الدرس:",
-            inpLesson: "عنوان الدرس",
+            lblSupervisor1: "المشرف العلمي الأول:",
+            lblSupervisor2: "المشرف العلمي الثاني:",
             lblDate: "التاريخ:",
-            lblSupervisor: "المشرف العلمي:",
-            inpSupervisor1: "اسم المشرف الأول",
-            inpSupervisor2: "اسم المشرف الثاني",
             thItem: "البند",
             thMax: "الدرجة العظمى",
             thScore: "الدرجة",
-            lblTotal: "المجموع الإجمالي:",
+            lblTotalScore: "المجموع الإجمالي:",
+            lblSupervisorNotes: "ملاحظات المشرف العلمي:",
+            phNotes: "اكتب ملاحظاتك أو توصياتك هنا...",
             btnBack: "العودة للرئيسية",
-            btnDownload: "تحميل",
-            btnReset: "تفريغ الخانات"
+            btnReset: "تفريغ الخانات",
+            btnPrint: "طباعة / حفظ PDF"
         },
         en: {
             docTitle: "Teacher Evaluation Form - Al Manahal International School",
-            pageTitle: "Teacher Evaluation Form",
-            pageSubTitle: "Academic Office - Academic Year 2026 / 2027",
-            lblTeacher: "Teacher's Name:",
-            inpTeacher: "Teacher's Name",
+            deptTitle: "Academic Office",
+            yearTitle: "Teacher Evaluations for Academic Year 2026 - 2027",
+            lblTeacher: "Teacher Name:",
             lblSubject: "Subject:",
-            inpSubject: "Subject",
             lblLesson: "Lesson Title:",
-            inpLesson: "Lesson Title",
+            lblSupervisor1: "First Academic Supervisor:",
+            lblSupervisor2: "Second Academic Supervisor:",
             lblDate: "Date:",
-            lblSupervisor: "Academic Supervisor:",
-            inpSupervisor1: "First Supervisor",
-            inpSupervisor2: "Second Supervisor",
-            thItem: "Item",
+            thItem: "Evaluation Item",
             thMax: "Max Grade",
-            thScore: "Grade",
-            lblTotal: "Total Score:",
+            thScore: "Score",
+            lblTotalScore: "Total Score:",
+            lblSupervisorNotes: "Academic Supervisor Notes:",
+            phNotes: "Write your notes or recommendations here...",
             btnBack: "Back to Home",
-            btnDownload: "Download",
-            btnReset: "Reset Form"
+            btnReset: "Reset Form",
+            btnPrint: "Print / Save PDF"
         },
         tr: {
             docTitle: "Öğretmen Değerlendirme Formu - El Manahal Uluslararası Okulu",
-            pageTitle: "Öğretmen Değerlendirme Formu",
-            pageSubTitle: "Akademik Ofis - 2026 / 2027 Eğitim Öğretim Yılı",
+            deptTitle: "Akademik Ofis",
+            yearTitle: "2026 - 2027 Eğitim Öğretim Yılı Öğretmen Değerlendirmeleri",
             lblTeacher: "Öğretmenin Adı:",
-            inpTeacher: "Öğretmenin Adı",
             lblSubject: "Dersin Adı:",
-            inpSubject: "Ders",
             lblLesson: "Ders Konusu:",
-            inpLesson: "Ders Konusu",
+            lblSupervisor1: "1. Akademik Danışman:",
+            lblSupervisor2: "2. Akademik Danışman:",
             lblDate: "Tarih:",
-            lblSupervisor: "Akademik Danışman:",
-            inpSupervisor1: "Birinci Danışman",
-            inpSupervisor2: "İkinci Danışman",
             thItem: "Değerlendirme Kriteri",
             thMax: "Maks. Puan",
             thScore: "Puan",
-            lblTotal: "Toplam Puan:",
+            lblTotalScore: "Toplam Puan:",
+            lblSupervisorNotes: "Akademik Danışman Notları:",
+            phNotes: "Notlarınızı veya önerilerinizi buraya yazın...",
             btnBack: "Ana Sayfaya Dön",
-            btnDownload: "İndir",
-            btnReset: "Formu Temizle"
+            btnReset: "Formu Temizle",
+            btnPrint: "Yazdır / PDF Kaydet"
         }
     };
 
-    function renderTable(lang) {
-        const tableBody = document.getElementById('itemsTableBody');
-        tableBody.innerHTML = '';
+    let currentLang = 'ar';
 
+    function renderTable() {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
         itemsData.forEach((item, index) => {
-            const row = document.createElement('tr');
-            const title = item[lang] || item.ar;
-            const note = lang === 'ar' ? item.noteAr : (lang === 'en' ? item.noteEn : item.noteTr);
-            const noteText = note ? ` <small style="color:#718096;">${note}</small>` : '';
-
-            row.innerHTML = `
-                <td class="num-col">${index + 1}</td>
-                <td class="title-col">${title} ${noteText}</td>
-                <td class="max-col">${item.max}</td>
-                <td class="input-col">
-                    <input type="number" 
-                           class="score-input" 
-                           min="0" 
-                           max="${item.max}" 
-                           placeholder="0-${item.max}" 
-                           data-max="${item.max}"
-                           oninput="calculateTotal(this)">
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="center">${index + 1}</td>
+                <td>${item[currentLang]}</td>
+                <td class="center">${item.max}</td>
+                <td class="center">
+                    <input type="number" min="0" max="${item.max}" class="score-input" oninput="calculateTotal()" data-max="${item.max}">
                 </td>
             `;
-            tableBody.appendChild(row);
+            tbody.appendChild(tr);
         });
     }
 
-    function applyLanguage(lang) {
-        const htmlTag = document.getElementById('htmlTag');
-        htmlTag.lang = lang;
-        htmlTag.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-        const txt = uiTexts[lang];
-        document.getElementById('docTitle').innerText = txt.docTitle;
-        document.getElementById('pageTitle').innerText = txt.pageTitle;
-        document.getElementById('pageSubTitle').innerText = txt.pageSubTitle;
-        document.getElementById('lblTeacher').innerText = txt.lblTeacher;
-        document.getElementById('inpTeacher').placeholder = txt.inpTeacher;
-        document.getElementById('lblSubject').innerText = txt.lblSubject;
-        document.getElementById('inpSubject').placeholder = txt.inpSubject;
-        document.getElementById('lblLesson').innerText = txt.lblLesson;
-        document.getElementById('inpLesson').placeholder = txt.inpLesson;
-        document.getElementById('lblDate').innerText = txt.lblDate;
-        document.getElementById('lblSupervisor').innerText = txt.lblSupervisor;
-        document.getElementById('inpSupervisor1').placeholder = txt.inpSupervisor1;
-        document.getElementById('inpSupervisor2').placeholder = txt.inpSupervisor2;
-        
-        document.getElementById('thItem').innerText = txt.thItem;
-        document.getElementById('thMax').innerText = txt.thMax;
-        document.getElementById('thScore').innerText = txt.thScore;
-        document.getElementById('lblTotal').innerText = txt.lblTotal;
-        
-        document.getElementById('btnBack').innerText = txt.btnBack;
-        document.getElementById('btnDownload').innerText = txt.btnDownload;
-        document.getElementById('btnReset').innerText = txt.btnReset;
-
-        renderTable(lang);
-        calculateTotal();
-    }
-
-    function calculateTotal(inputElement) {
-        if (inputElement) {
-            const maxVal = parseFloat(inputElement.getAttribute('data-max'));
-            let currentVal = parseFloat(inputElement.value);
-
-            if (currentVal > maxVal) {
-                inputElement.value = maxVal;
-            } else if (currentVal < 0) {
-                inputElement.value = 0;
-            }
-        }
-
-        const inputs = document.querySelectorAll('.score-input');
+    function calculateTotal() {
         let total = 0;
+        const inputs = document.querySelectorAll('.score-input');
         inputs.forEach(input => {
-            const val = parseFloat(input.value);
-            if (!isNaN(val)) {
-                total += val;
+            let val = parseFloat(input.value) || 0;
+            const max = parseFloat(input.dataset.max);
+            if (val > max) {
+                val = max;
+                input.value = max;
             }
+            if (val < 0) {
+                val = 0;
+                input.value = 0;
+            }
+            total += val;
         });
-
-        document.getElementById('totalScore').innerText = total;
+        document.getElementById('totalScoreValue').innerText = `${total} / 100`;
     }
 
     function resetForm() {
-        document.getElementById('evalForm').reset();
-        document.getElementById('totalScore').innerText = '0';
+        document.querySelectorAll('input').forEach(input => input.value = '');
+        document.getElementById('supervisorNotes').value = '';
+        calculateTotal();
     }
 
-    function downloadEvaluation() {
-        window.open("https://drive.google.com/drive/folders/1zI1jQ04r3SSyqGHaXH6N_UskYeii1-PP?usp=sharing", "_blank");
-        window.print();
+    function applyLanguage(lang) {
+        currentLang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        const t = translations[lang];
+        document.getElementById('docTitle').innerText = t.docTitle;
+        document.getElementById('deptTitle').innerText = t.deptTitle;
+        document.getElementById('yearTitle').innerText = t.yearTitle;
+        document.getElementById('lblTeacher').innerText = t.lblTeacher;
+        document.getElementById('lblSubject').innerText = t.lblSubject;
+        document.getElementById('lblLesson').innerText = t.lblLesson;
+        document.getElementById('lblSupervisor1').innerText = t.lblSupervisor1;
+        document.getElementById('lblSupervisor2').innerText = t.lblSupervisor2;
+        document.getElementById('lblDate').innerText = t.lblDate;
+        document.getElementById('thItem').innerText = t.thItem;
+        document.getElementById('thMax').innerText = t.thMax;
+        document.getElementById('thScore').innerText = t.thScore;
+        document.getElementById('lblTotalScore').innerText = t.lblTotalScore;
+        document.getElementById('lblSupervisorNotes').innerText = t.lblSupervisorNotes;
+        document.getElementById('supervisorNotes').placeholder = t.phNotes;
+        document.getElementById('btnBack').innerText = t.btnBack;
+        document.getElementById('btnReset').innerText = t.btnReset;
+        document.getElementById('btnPrint').innerText = t.btnPrint;
+
+        renderTable();
+        calculateTotal();
+        localStorage.setItem('siteLang', lang);
+    }
+
+    function setLanguage(lang) {
+        applyLanguage(lang);
     }
 
     window.onload = function() {
